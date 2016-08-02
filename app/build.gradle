@@ -14,7 +14,9 @@ android {
 
         ndk{
             moduleName "test"			//生成的so名字
+            ldLibs "log"
             abiFilters "armeabi", "armeabi-v7a", "x86"	//输出指定三种abi体系结构下的so库
+
             //  stl "stlport_shared"
             //  ldLibs "log", "z", "m"
             //  cFlags "-I/some/include/path"
