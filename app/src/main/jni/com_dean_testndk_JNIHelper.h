@@ -4,6 +4,7 @@
 
 #ifndef _Included_com_dean_testndk_JNIHelper
 #define _Included_com_dean_testndk_JNIHelper
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -14,6 +15,10 @@ extern "C" {
  */
 JNIEXPORT jstring JNICALL Java_com_dean_testndk_JNIHelper_getStringFromNative
   (JNIEnv *, jclass);
+
+
+JNIEXPORT void JNICALL
+        Java_com_dean_testndk_MainActivity_doCalcPlus(JNIEnv *, jobject);
 
 #ifdef __cplusplus
 }
