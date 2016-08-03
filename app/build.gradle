@@ -14,6 +14,7 @@ model {
         }
         ndk {
             moduleName = 'test'
+            stl = 'gnustl_static'
             ldLibs.addAll(['android', 'log'])
         }
         buildTypes {

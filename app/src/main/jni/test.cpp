@@ -2,6 +2,9 @@
 // Created by Dean Guo on 7/23/16.
 //
 #include "com_dean_testndk_JNIHelper.h"
+#include "string.h"
+#include "iostream"
+using namespace std;
 
 struct GLOBAL_INSTANCE {
     jclass mainActivityClz;
@@ -39,9 +42,8 @@ Java_com_dean_testndk_MainActivity_doCalcPlus(JNIEnv *env, jobject instance) {
     sendJavaMsg(env, mGlobalInstance.jniHelperObj, statusId, "TickerThread status: initializing...");
 
     // get number1
-
+    std::cout << "ff" << std::endl;
     // get number2
-
 }
 
 void nativeCallJavaClass(JNIEnv *env, jobject instance) {
@@ -68,7 +70,7 @@ void nativeCallJavaClass(JNIEnv *env, jobject instance) {
     weakGlobalClazz = (jclass) env->NewWeakGlobalRef(localClazz);
     env->DeleteGlobalRef(weakGlobalClazz);
 
-    if (JNI_FALSE == env->IsSameObject(weakGlobalClazz, nullptr)) {
+    if (JNI_FALSE == env->IsSameObject(weakGlobalClazz, NULL)) {
         // 有效
     } else {
         // 对象被垃圾回收器回收, 不可使用
