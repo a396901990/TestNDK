@@ -13,37 +13,36 @@ public class MainActivity extends AppCompatActivity {
         System.loadLibrary("test");
     }
 
-    public native void doCalcPlus();
+    public native void doSort(int [] array);
 
-    public native void getResult();
-
-    private Button plusBtn;
-    private TextView resultText;
+    private Button mPlusBtn;
+    private TextView mResultText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Log.i("ndk_log : ", JNIHelper.getStringFromNative());
 
-        resultText = (TextView) this.findViewById(R.id.result);
-        resultText.setText(JNIHelper.getStringFromNative());
+        mResultText = (TextView) this.findViewById(R.id.result);
+        mResultText.setText(JNIHelper.getStringFromNative());
 
-        plusBtn = (Button) this.findViewById(R.id.plus_btn);
-        plusBtn.setOnClickListener(new View.OnClickListener() {
+        mPlusBtn = (Button) this.findViewById(R.id.plus_btn);
+        mPlusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                doCalcPlus();
+
+                int[] a = {6,2,5,9,1,3,4,6,8,0};
+
+                doSort(a);
             }
         });
 
     }
 
-    public void getNumberOne() {
-
+    public void setResultText(String resultText) {
+        mResultText.setText(resultText);
     }
 
-    public void getNumberTweo() {
-
-    }
 }
