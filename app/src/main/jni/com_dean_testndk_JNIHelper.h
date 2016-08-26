@@ -16,7 +16,7 @@ extern "C" {
 JNIEXPORT jstring JNICALL
         Java_com_dean_testndk_JNIHelper_getStringFromNative(JNIEnv *, jclass);
 
-JNIEXPORT jintArray JNICALL
+JNIEXPORT jboolean JNICALL
         Java_com_dean_testndk_MainActivity_doSort(JNIEnv *, jobject, jintArray);
 #ifdef __cplusplus
 }
