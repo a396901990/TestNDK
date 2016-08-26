@@ -13,26 +13,35 @@ public class MainActivity extends AppCompatActivity {
         System.loadLibrary("test");
     }
 
-    private Button orderBtn;
-    private TextView resultText;
-    private JNIHelper jniHelper;
+    public native void doSort(int [] array);
+
+    private Button mPlusBtn;
+    private TextView mResultText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        jniHelper = new JNIHelper();
 
-        resultText = (TextView) this.findViewById(R.id.result);
-        resultText.setText("test");
+        Log.i("ndk_log : ", JNIHelper.getStringFromNative());
 
-        orderBtn = (Button) this.findViewById(R.id.order_btn);
-        orderBtn.setOnClickListener(new View.OnClickListener() {
+        mResultText = (TextView) this.findViewById(R.id.result);
+        mResultText.setText(JNIHelper.getStringFromNative());
+
+        mPlusBtn = (Button) this.findViewById(R.id.plus_btn);
+        mPlusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int[] a = {6,2,5,9,1,3,4,6,8,0};
-                jniHelper.doOrder(a);
+
+                int[] a = {6,2,5,9,1,3,4,7,8,0,10};
+                doSort(a);
             }
         });
+
     }
+
+    public void setResultText(String resultText) {
+        mResultText.setText(resultText);
+    }
+
 }

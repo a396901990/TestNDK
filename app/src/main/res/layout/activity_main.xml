@@ -18,9 +18,8 @@
 
     <Button
         android:layout_below="@+id/result"
-        android:id="@+id/order_btn"
-        android:text="order"
+        android:id="@+id/plus_btn"
+        android:text="testPlus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
 </RelativeLayout>
