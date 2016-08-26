@@ -30,31 +30,42 @@ struct GLOBAL_CONTEXT {
 GLOBAL_CONTEXT mContext;
 
 void sendJavaMsg(JNIEnv *env, jobject instance, jmethodID func, const char *msg) {
+
     jstring javaMsg = env->NewStringUTF(msg);
     env->CallVoidMethod(instance, func, javaMsg);
-    env->DeleteLocalRef(javaMsg);
+//
+//    jthrowable ex = env->ExceptionOccurred();
+//    if (0 != ex) {
+//        env->ExceptionClear();
+//        LOGE("Exception-sendJavaMsg!");
+//    }
+//    env->DeleteLocalRef(javaMsg);
 }
 
 void callSetResult(JNIEnv *env, vector<int> vector_) {
 
-    char buff[1000];
-
+    char buff[1000] = "";
 
     vector<int>::iterator it;
 
     for (it = vector_.begin(); it != vector_.end(); it++) {
-        char numChar[100];
+        char numChar[100] = "";
         sprintf(numChar, "%d", *it);
-
         strcat(numChar, ",");
         strcat(buff, numChar);
     }
 
     jstring javaMsg = env->NewStringUTF(buff);
-
-    jmethodID methodID = env->GetMethodID(mContext.mainActivityClz, "setResultText", "(Ljava/lang/String;)V");
-    env->CallVoidMethod(mContext.mainActivityObj, methodID, javaMsg);
-    env->DeleteLocalRef(javaMsg);
+    jthrowable ex = env->ExceptionOccurred();
+    if (0 != ex) {
+        env->ExceptionClear();
+        env->DeleteLocalRef(javaMsg);
+        LOGE("Exception-sendJavaMsg!");
+    } else {
+        jmethodID methodID = env->GetMethodID(mContext.mainActivityClz, "setResultText", "(Ljava/lang/String;)V");
+        env->CallVoidMethod(mContext.mainActivityObj, methodID, javaMsg);
+        env->DeleteLocalRef(javaMsg);
+    }
 }
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
